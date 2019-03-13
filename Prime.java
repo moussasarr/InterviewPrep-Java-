@@ -35,7 +35,9 @@ public class Prime {
      return true;
    }
 
+
    //Print all primes less or equal to n using Sieve of Erasthostenes
+   //Assume all numbers are prime till proven otherwise
    public static void printPrimes (int n) {
      boolean[] prime = new boolean[n+1];
      for(int i = 2; i <= n; i++) {
