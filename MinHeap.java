@@ -109,39 +109,37 @@ public class MinHeap {
 
     public static void main(String[] args){
       System.out.println("Compiled and running ...");
-      int[] j = new int[]{ 87, 32, 24, 54, 61, 70 };
+      int[] j = new int[]{ 87, 32, 24, 54, 61, 70, 6, 34, 44, 23, 84, 32, 32, 45, 13, 12, 84, 78, 67,54 };
       System.out.println(j.length);
       heapify(j);
 
-     //  for(int i : j){
-     //   System.out.println(i);
-     // }
-      MinHeap nHeap = heapify(j);
-      for(int k : nHeap.heap){
+
+      MinHeap myHeap = heapify(j);
+      for(int k : myHeap.heap){
        System.out.println(k);
      }
-     //  // myHeap.insert(50);
-      // myHeap.insert(30);
-      // myHeap.insert(20);
-      // myHeap.insert(15);
-      // myHeap.insert(10);
-      // myHeap.insert(8);
-      // myHeap.insert(16);
-      // myHeap.insert(60);
-      // myHeap.insert(2);
-      // myHeap.insert(9);
-      // for(int i : myHeap.heap){
-      //   System.out.println(i);
-      // }
-      //  System.out.println("Removed ...");
-      //  System.out.println(myHeap.remove());
-      //  System.out.println(myHeap.remove());
-      //  System.out.println(myHeap.remove());
-      //
-      // for(int i : myHeap.heap){
-      //   System.out.println(i);
-      // }
-      //
-      // System.out.println(myHeap.size);
+      myHeap.insert(50);
+      myHeap.insert(30);
+      myHeap.insert(20);
+      myHeap.insert(15);
+      myHeap.insert(10);
+      myHeap.insert(8);
+      myHeap.insert(16);
+      myHeap.insert(60);
+      myHeap.insert(2);
+      myHeap.insert(9);
+      for(int i : myHeap.heap){
+        System.out.println(i);
+      }
+       System.out.println("Removed ...");
+       System.out.println(myHeap.remove());
+       System.out.println(myHeap.remove());
+       System.out.println(myHeap.remove());
+
+      for(int i : myHeap.heap){
+        System.out.println(i);
+      }
+
+      System.out.println(myHeap.size);
     }
    }
