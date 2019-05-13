@@ -107,6 +107,10 @@ public class MinHeap {
       return newHeap;
     }
 
+
+
+
+
     public static void main(String[] args){
       System.out.println("Compiled and running ...");
       int[] j = new int[]{ 87, 32, 24, 54, 61, 70, 6, 34, 44, 23, 84, 32, 32, 45, 13, 12, 84, 78, 67,54 };
@@ -141,5 +145,12 @@ public class MinHeap {
       }
 
       System.out.println(myHeap.size);
+
+      //Printing elements in ascending order
+      //Heap Sort so in O(nlogn)
+      for( int m = 1; m <= myHeap.size; m++){
+        System.out.println(myHeap.remove());
+      }
+
     }
    }
