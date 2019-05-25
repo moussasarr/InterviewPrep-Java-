@@ -1,5 +1,7 @@
 public class AddTwoNumbers {
 
+  //Assuming the the addition of the two numbers will not cause overflow when represented by int type
+  //Meaning the two numbers are small enough that their addition can be represented with an integer
   public ListNode addTwoNumbers(ListNode l1, ListNode l2) {
         int num1 = l1.val;
         int base = 1;
@@ -21,17 +23,16 @@ public class AddTwoNumbers {
 
        Integer addResult = num1 + num2;
        String resultString = addResult.toString();
-
        int len = resultString.length();
-        String reversed = "";
-       StringBuilder input1 = new StringBuilder();
+       char[] c = new char[len];
 
-        // append a string into StringBuilder input1
-        input1.append(resultString); 
+       for(int m = 0; m < len; m++){
+         c[i] = resultString.charAt(len - 1 - i);
+       }
+       resultString = String.valueOf(c);
+       addResult = Integer.valueOf(resultString);
+       
 
-        // reverse StringBuilder input1
-       input1 = input1.reverse();
-       addResult = (int) input1.IntValue();
        Double d = Math.pow(10, len -1);
        Integer integ = d.intValue();
        ListNode resultNode = new ListNode(addResult/integ);
