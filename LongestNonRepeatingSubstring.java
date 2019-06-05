@@ -1,7 +1,10 @@
 import java.util.HashMap;
-
 class LongestNonRepeatingSubstring {
+  public static int bruteForce(String s){
+    //Loop through
+  }
 
+  //Takes O(n^2) time and s
   public static int maxSubLength(String s){
     if((s == null) || (s == "") || (s.equals(new String("")))){
          return 0;
