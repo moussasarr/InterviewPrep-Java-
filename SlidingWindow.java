@@ -113,13 +113,54 @@ public class SlidingWindow {
 
 
 
+    /* Sliding Window 4:
+      Given an array of n positive integers and a positive integer s,
+      find the minimal length of a contiguous subarray of which the sum ≥ s.
+      If there isn’t one, return 0 instead.
+
+      Approach1: Brute Force
+          Find all the subarrays --O(n^2) and for Each subarray
+             -use the 2 pointer technique
+
+      */
+      // T(n) = O(n^2) at worst
+      public static int minSubSum(int[] arr, int s){
+        int n = arr.length, minLen = Integer.MAX_VALUE, j, currSum;
+        // n iterations
+        for(int i = 0; i < n; i++){
+          j = i;  currSum = 0;
+          //at worst n iterations
+          while((currSum < s) && (j < n)){
+            currSum += arr[j];
+            if(currSum >= s){
+              break;
+            }
+            j++;
+          }
+          if(j < n) minLen = Math.min(minLen, j - i + 1);
+        }
+        return minLen < Integer.MAX_VALUE ? minLen: 0;
+      }
+
+/* 4. Given a string, find the length of the longest substring T that contains
+   at most k distinct characters.
+
+   Example1: [e,c,e,b,a], k = 2
+             [ e, c, e]  res = 2
+
+             [e,c,c,b,a], k = 2,
+             [e, c, c] res = 2
+
+    */
+
+
 
 
 
   public static void main(String[] args){
     int[] in1 = new int[]{ 10, 20, 30, 40, 50, 60, 70 };
     int[] in2 = new int[]{ 5, 1, 13, 40, 10, 20, 10 };
-    int[] in3 = new int[]{ 2, 1, 3, 4, 4, 2, 4, 23, 9 };
+    int[] in3 = new int[]{ 2, 1, 3, 4, 4, 2, 4, 3, 9 };
     int k = 3;
 
     System.out.println(maximumAvg(in1, k));
@@ -136,5 +177,9 @@ public class SlidingWindow {
     System.out.println("================================");
     double[] med3 = medianOfSlidingWindow(in3, k);
     for(double d3: med3) System.out.println(d3);
+
+    System.out.println("================================");
+    System.out.println(minSubSum(in3, 100));
+
   }
 }
