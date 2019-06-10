@@ -2,7 +2,9 @@
 import java.util.HashSet;
 import java.util.HashMap;
 class LongestNonRepeatingSubstring {
-  //Strategy 1: Brute Force
+
+  //Strategy 1: Using a HashSet to store already encounteered characters
+  //T(n) = O(n^2) , HashSet searches in constant time
   public static int bruteForce(String s){
    if((s == null) || (s == "") || (s.equals(new String("")))) return 0;
    int n = s.length(), maxLen = Integer.MIN_VALUE, curLen, j , i;
@@ -21,59 +23,41 @@ class LongestNonRepeatingSubstring {
    return maxLen;
   }
 
+  //Strategy 2: Using Sliding Window technique, combined with HashSet method
+  public static int SlidingWindow(String s){
+    if((s == null) || (s == "") || (s.equals(new String("")))) return 0;
+    int n = s.length(), maxLen = Integer.MIN_VALUE;
+    HashSet<Character> hashSet = new HashSet<>();
+    int i = 0;
+    int j = 0;
+    while(i < n && j < n){
+      if(!hashSet.contains(s.charAt(j))){
+        hashSet.add(s.charAt(j++));
+        maxLen = Math.max(maxLen, j - i);
+      } else {
+        hashSet.remove(s.charAt(i++));
+      }
+    }
+    return maxLen;
+    }
 
 
-
-
-  //Takes O(n^2) time and s
-  public static int maxSubLength(String s){
-    if((s == null) || (s == "") || (s.equals(new String("")))){
-         return 0;
-       }
-       HashMap<Character, Integer> chars;
-
-       int sLen = s.length();  //2
-       int longest = 1;
-       for(int i = 0; i < sLen; i++){
-          if(sLen - i <= longest){
-            break;
-          }
-
-           //Put the first char in HashMap
-           chars = new HashMap<>();
-           chars.put(s.charAt(i), i);   //a in hashmap
-           int len = 1;
-           //Looping through
-           for(int j = i + 1; j < sLen; j++){
-               if(chars.get(s.charAt(j)) == null){
-                   chars.put(s.charAt(j), j);
-                   len++; //2
-               } else {
-                   longest = Math.max(longest, len);
-                   i = chars.get(s.charAt(j));
-                   break;
-               }
-           }
-           longest = Math.max(longest, len);
-       }
-       return longest;
-   }
 
   public static void main(String[] args){
-    System.out.println(bruteForce("abcabcbb"));
+    System.out.println(SlidingWindow("abcabcbb"));
     //Should print 3
-    System.out.println(bruteForce("bbbbb"));
+    System.out.println(SlidingWindow("bbbbb"));
     //Should print("1")
-    System.out.println(bruteForce("pwwkew"));
+    System.out.println(SlidingWindow("pwwkew"));
     //Should print 3
 
-    System.out.println(bruteForce("pwwkewwwokeee"));
+    System.out.println(SlidingWindow("pwwkewwwokeee"));
     //Should print
-    System.out.println(bruteForce(" "));
-    System.out.println(bruteForce(""));
-    System.out.println(bruteForce(null));
-    System.out.println(bruteForce("au"));
-    System.out.println(bruteForce("aab"));
+    System.out.println(SlidingWindow(" "));
+    System.out.println(SlidingWindow(""));
+    System.out.println(SlidingWindow(null));
+    System.out.println(SlidingWindow("au"));
+    System.out.println(SlidingWindow("aab"));
   }
 
 }
