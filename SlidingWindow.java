@@ -1,4 +1,6 @@
+//https://medium.com/@zengruiwang/sliding-window-technique-360d840d5740
 import java.util.Arrays;
+import java.util.HashSet;
 
 public class SlidingWindow {
   /***SLIDING WINDOW 1-)
@@ -142,16 +144,44 @@ public class SlidingWindow {
         return minLen < Integer.MAX_VALUE ? minLen: 0;
       }
 
+
+
 /* 4. Given a string, find the length of the longest substring T that contains
    at most k distinct characters.
 
    Example1: [e,c,e,b,a], k = 2
-             [ e, c, e]  res = 2
+             [ e, c, e]  res = 3
 
              [e,c,c,b,a], k = 2,
-             [e, c, c] res = 2
+             [e, c, c] res = 3
 
     */
+
+//Strategy 1: bruteForce
+//Go through the array and for each index of the array, use the 2-pointer technique
+
+//Time Complexity Analysis:
+  // i loops n times and j loops at worst n times
+  // So worst-case time complexity T(n) = O(n^2)
+public static int lengthLongestSubstringKDistinct(String s, int k){
+  int j = 0, nDistinct= 0, maxLength = 0, currentMaxLength = 0;
+  HashSet<Character> charSet = new HashSet<>();
+   for(int i = 0; i < s.length(); i++){
+     while(nDistinct <= k){
+       if(!charSet.contains(s.charAt(j))){
+         if(nDistinct == k){
+           break;
+         }
+         charSet.add(s.charAt(j));
+         nDistinct++;
+       }
+     }
+     maxLength = Math.max(maxLength, j-i + 1) ;
+   }
+  return maxLength;
+}
+
+
 
 
 
@@ -180,6 +210,12 @@ public class SlidingWindow {
 
     System.out.println("================================");
     System.out.println(minSubSum(in3, 100));
+
+    System.out.println("================================");
+    String s1 = "eceba", s2 = "eccba";
+    int n = 2;
+    System.out.println(lengthLongestSubstringKDistinct(s1, n));
+    System.out.println(lengthLongestSubstringKDistinct(s2, n));
 
   }
 }

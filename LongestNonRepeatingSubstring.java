@@ -24,6 +24,7 @@ class LongestNonRepeatingSubstring {
   }
 
   //Strategy 2: Using Sliding Window technique, combined with HashSet method
+  //At most, we are performing 2n iterations, so we have T = O(n) time
   public static int SlidingWindow(String s){
     if((s == null) || (s == "") || (s.equals(new String("")))) return 0;
     int n = s.length(), maxLen = Integer.MIN_VALUE;
@@ -43,6 +44,20 @@ class LongestNonRepeatingSubstring {
 
 
 
+
+    public static SlidingWindowOptimized(String s){
+       int n = s.length, maxLen;
+       HashMap<Character, Integer> map = new HashMap<>();
+       for(int i = 0, j = 0; j < n; j++){
+         if(map.containsKey(s.charAt(j))){
+           i = s.charAt(j) + 1;
+         }
+         maxLen = Math.max(maxLen, j - i);
+       }
+    }
+
+
+
   public static void main(String[] args){
     System.out.println(SlidingWindow("abcabcbb"));
     //Should print 3
@@ -50,7 +65,6 @@ class LongestNonRepeatingSubstring {
     //Should print("1")
     System.out.println(SlidingWindow("pwwkew"));
     //Should print 3
-
     System.out.println(SlidingWindow("pwwkewwwokeee"));
     //Should print
     System.out.println(SlidingWindow(" "));
