@@ -1,7 +1,8 @@
 //https://medium.com/@zengruiwang/sliding-window-technique-360d840d5740
 import java.util.Arrays;
 import java.util.HashSet;
-
+import java.util.HashMap;
+import java.util.Map;
 public class SlidingWindow {
   /***SLIDING WINDOW 1-)
   Given an array consisting of n integers,
@@ -164,7 +165,7 @@ public class SlidingWindow {
   // i loops n times and j loops at worst n times
   // So worst-case time complexity T(n) = O(n^2)
 public static int lengthLongestSubstringKDistinct(String s, int k){
-  int j = 0, nDistinct= 0, maxLength = 0, currentMaxLength = 0;
+  int j = 0, nDistinct= 0, maxLength = 0;
   HashSet<Character> charSet = new HashSet<>();
    for(int i = 0; i < s.length(); i++){
      while(nDistinct <= k){
@@ -175,17 +176,17 @@ public static int lengthLongestSubstringKDistinct(String s, int k){
          charSet.add(s.charAt(j));
          nDistinct++;
        }
+       j++;
      }
-     maxLength = Math.max(maxLength, j-i + 1) ;
+     maxLength = Math.max(maxLength, j-i) ;
    }
   return maxLength;
 }
 
+//Strategy 2: Using Sliding window technique to improve
+public static int longestSubstringKDistinctlen(String s, int k){
 
-
-
-
-
+}
 
   public static void main(String[] args){
     int[] in1 = new int[]{ 10, 20, 30, 40, 50, 60, 70 };
@@ -217,5 +218,8 @@ public static int lengthLongestSubstringKDistinct(String s, int k){
     System.out.println(lengthLongestSubstringKDistinct(s1, n));
     System.out.println(lengthLongestSubstringKDistinct(s2, n));
 
+    System.out.println("================================");
+    System.out.println(longestSubstringKDistinctlen(s1, n));
+    System.out.println(longestSubstringKDistinctlen(s2, n));
   }
 }

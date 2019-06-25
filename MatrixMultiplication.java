@@ -1,5 +1,6 @@
 public class MatrixMultiplication {
-  // Dumb brute-force matrix multiplication
+
+  // Dumb brute-force matrix multiplication of 2 matrices
   // Goes in cubic time---Extremely slow
   public static int[][] bruteForceMultiply( int[][] matrix1, int[][] matrix2){
         // first row of Matrix 1
@@ -29,6 +30,32 @@ public class MatrixMultiplication {
         return result;
   }
 
+  //Demonstrating code for Matrix Chain multiplication with Dynamic Programming
+  //  A1 * A2 *  A3 * A4
+  //(5*4) (4*6) (6*2) (2*7)
+  public static int[][] chainMultiply(){
+   int[] d = new int[] { 5, 4, 6, 2, 7 };
+   int n = d.length, dist, j, noMult;
+   int[][] m = new int[n][n];
+   int[][] s = new int[n][n];
+
+   for(dist = 1; dist < n ; dist++){
+     for(int i = 1; i + dist < n; i++){
+       j = i + dist;
+       m[i][j] = m[i][i] + m[i+1][j] + d[i - 1]*d[i]*d[j];
+       s[i][j] = 1;
+       for(int k  = i; k < j ; k++){
+         noMult = m[i][k] + m[k+1][j] + d[i -1]*d[k]*d[j];
+         if(m[i][j] > noMult){
+           m[i][j] = noMult;
+           s[i][j] = k;
+         }
+       }
+     }
+   }
+   return s;
+  }
+
    public static void main(String[] args){
      int[][] A = new int[][]{{2, 5, 8}, {3, 6 , 8}};
      int[][] B = new int[][]{{4, 5}, {-3, 1}, {4, 2}};
@@ -41,9 +68,19 @@ public class MatrixMultiplication {
        }
         System.out.println("");
      }
+
+     int[][] m = chainMultiply();
+     for(int i = 0 ; i < m.length; i++){
+       int[] matrix = m[i];
+       System.out.println("  ");
+       for(int j = 0; j < matrix.length; j++){
+         System.out.print(matrix[j]);
+         System.out.print("      ");
+       }
+
+
+     }
    }
-
-
 
 
 }
