@@ -108,45 +108,7 @@ public static String dynamicProgramming(String s){
       }
     }
   }
-
   return longestSubstrPal;
-
-
-
-
-
-
-  // int n = s.length();
-  // if(n < 2) return s;
-  //
-  // boolean[][] pal = new boolean[n][n];
-  // String longestSubstr = s.substring(0, 1);
-  //
-  // //DP initialization for substrings of 1 and 2 characters O(n)
-  // for(int i = 0; i < n; i++){
-  //   pal[i][i] = true;
-  //   if( i != n-1){
-  //     pal[i][i+1] = s.charAt(i) == s.charAt(i+1) ? true : false;
-  //     if(pal[i][i+1] && (s.substring(i, i+2).length() > longestSubstr.length())){
-  //       longestSubstr = s.substring(i, i +2);
-  //     }
-  //   }
-  // }
-  //
-  //
-  //
-  // for(int d = 3; s.length() > 2 && d + 3 <= n; d++){
-  //   for(int j = 0; j + d <= n - 1; j++){
-  //     pal[j][j + d] = pal[j+1][j+d-1] && (s.charAt(j) == s.charAt(j+d)) ? true: false;
-  //     //Check to see if we have a new longest substring
-  //     if(pal[j][j+d] && (s.substring(j, j+d+1).length() > longestSubstr.length())){
-  //       longestSubstr = s.substring(j, j+d+1);
-  //     }
-  //   }
-  // }
-  //
-  //
-  // return longestSubstr;
 }
 
   public static void main(String[] args){
