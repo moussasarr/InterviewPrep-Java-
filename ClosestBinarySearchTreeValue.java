@@ -26,10 +26,12 @@ public class ClosestBinarySearchTreeValue {
     the task is to find the smallest number in the binary search tree that is
     greater than or equal to N.
     Print the value of the element if it exists otherwise print -1.
+
+    Time Complexity: O(log n) and Sapce O(n)
     */
     public static double smallestGreaterThan(double target, TreeNode root){
       Stack<TreeNode> stack = new Stack<>();
-      if( root == null ) return -1;
+      if( root == null ) return -1.0;
 
       while( root != null ){
         stack.push(root);
@@ -39,15 +41,12 @@ public class ClosestBinarySearchTreeValue {
           root = root.left;
         }
       }
-
-
-        while(!stack.empty()){
+      while(!stack.empty()){
           root = stack.pop();
           if(root.val > target){
             return root.val;
           }
         }
-
       return -1.0;
     }
 
@@ -56,43 +55,65 @@ public class ClosestBinarySearchTreeValue {
 
 
     public static void main(String[] args){
-       TreeNode root = new TreeNode(8);
-       TreeNode a = new TreeNode(5);
-       TreeNode b = new TreeNode(12);
-       TreeNode c = new TreeNode(3);
-       TreeNode d = new TreeNode(6);
-       TreeNode e = new TreeNode(10);
-       TreeNode f = new TreeNode(14);
-       TreeNode g = new TreeNode(9);
-       TreeNode h = new TreeNode(11);
-       TreeNode i = new TreeNode(13);
-       TreeNode j = new TreeNode(15);
-       root.left = a;
-       root.right = b;
-       a.left = c;
-       a.right = d;
-       b.left = e;
-       b.right = f;
-       e.left = g;
-       e.right = h;
-       f.left = i;
-       i.left = g;
 
-       System.out.println(smallestGreaterThan(14, root));
+      TreeNode exampleBs = new TreeNode(13);
+        exampleBs.left = new TreeNode(3);
+        exampleBs.right = new TreeNode(14);
+        TreeNode firstLeft = exampleBs.left;
+        TreeNode firstRight = exampleBs.right;
+
+        firstLeft.left = new TreeNode(1);
+        firstLeft.right = new TreeNode(4);
+        firstRight.right = new TreeNode(18);
+        firstLeft.left.right = new TreeNode(2);
+        firstLeft.right.right = new TreeNode(12);
+
+       TreeNode twelve = firstLeft.right.right;
+       twelve.left = new TreeNode(10);
+       twelve.left.right = new TreeNode(11);
+       twelve.left.left = new TreeNode(5);
+
+       TreeNode five = twelve.left.left;
+       five.right = new TreeNode(8);
+       five.right.right = new TreeNode(9);
+       five.right.left = new TreeNode(7);
+       five.right.left.left = new TreeNode(6);
+
+
+       System.out.println(smallestGreaterThan(6, exampleBs));
+
+
+
     }
-
-
-
-
-
 
     /*We have a binary search tree and a number N. Our task is to find the greatest
      number in the binary search tree that is less than or equal to N.
      Print the value of the element if it exists otherwise print -1.
+
+     Time compleaxity log(n) time and O(n) space (stack)
      */
-     // public static double greatestLessThan(double target, TreeNode root){
-     //
-     // }
+     public static double greatestLessThan(double target, TreeNode root){
+       if(root == null) return -1.0;
+       Stack<TreeNode> stack = new Stack<>();
+
+       while(root != null){
+         stack.push(root);
+         if(root.val >= target){
+           root = root.left;
+         } else if(root.val < target){
+           root = root.right;
+         }
+       }
+
+       while(!stack.empty()){
+         root = stack.pop();
+         if(root.val < target){
+           return root.val;
+         }
+       }
+
+       return -1.0;
+     }
 
 
 
