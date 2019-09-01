@@ -1,11 +1,3 @@
-/*
-Given a non-empty binary search tree and a target value, find the value in the BST that is closest to the target.
-
-Note:
-
-Given target value is a floating point.
-You are guaranteed to have only one unique value in the BST that is closest to the target.
-*/
 import java.util.Stack;
 import java.util.TreeMap;
 class TreeNode{
@@ -21,6 +13,41 @@ class TreeNode{
 }
 
 public class ClosestBinarySearchTreeValue {
+  /*
+  Given a non-empty binary search tree and a target value, find the value in the BST that is closest to the target.
+
+  Note:
+
+  Given target value is a floating point.
+  You are guaranteed to have only one unique value in the BST that is closest to the target.
+  */
+  public static double closestValue(double target, TreeNode root){
+    double val1 = smallestGreaterThan(target, root),
+           val2 = greatestLessThan(target, root),
+           d1 = val1 - target,
+           d2 = target - val2;
+
+    //Search for the value in the Binary Search Tree
+    while(root != null){
+      if(target < root.val){
+        root = root.left;
+      }
+      else if(target > root.val){
+        root = root.right;
+      }
+      else{
+        return root.val;
+      }
+    }
+
+    if(val1 == -1 && val2 != -1) return val2;
+    if(val1 != -1 && val2 == -1) return val1;
+    return Math.min(d1, d2) == d1 ? val1 : val2;
+  }
+
+
+
+
     /*
     Given a Binary Search Tree and a number N,
     the task is to find the smallest number in the binary search tree that is
@@ -80,9 +107,8 @@ public class ClosestBinarySearchTreeValue {
        five.right.left.left = new TreeNode(6);
 
 
-       System.out.println(smallestGreaterThan(6, exampleBs));
-
-
+       //System.out.println(smallestGreaterThan(6, exampleBs));
+       System.out.println(closestValue(15.3, exampleBs));
 
     }
 
